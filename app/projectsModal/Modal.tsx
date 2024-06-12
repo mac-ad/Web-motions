@@ -64,7 +64,7 @@ const Modal = ({
       variants={scaleAnimation}
       initial={"initial"}
       animate={active ? "open" : "closed"}
-      className="absolute h-[350px] w-[400px] flex items-center justify-center overflow-hidden pointer-events-none z-[100]"
+      className="absolute h-[250px] w-[250px] flex items-center justify-center overflow-hidden pointer-events-none z-[100]"
       ref={container}
     >
       <div className="h-full w-full">

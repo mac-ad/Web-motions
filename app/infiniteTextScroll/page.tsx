@@ -1,10 +1,8 @@
 "use client";
-
-import Image from "next/image";
-
 import gsap from "gsap";
 import { useEffect, useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lenis from "@studio-freight/lenis";
 
 const page = () => {
   const firstText = useRef(null);
@@ -27,6 +25,17 @@ const page = () => {
         onUpdate: (e) => (direction = e.direction * -1),
       },
     });
+  }, []);
+
+  useEffect(() => {
+    const lenis = new Lenis();
+
+    const raf = (time: any) => {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
+
+    requestAnimationFrame(raf);
   }, []);
 
   const animation = () => {
@@ -53,7 +62,7 @@ const page = () => {
         /> */}
         <div
           ref={slider}
-          className="z-[999] text-red text-[16rem] font-medium text-white absolute bottom-0"
+          className="z-[999] text-red text-[12rem] font-medium text-white absolute bottom-0"
         >
           <div className="relative">
             <p ref={firstText} className="whitespace-nowrap">
