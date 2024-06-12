@@ -10,7 +10,7 @@ export interface projectInterface {
   color: string;
 }
 
-export const projects: projectInterface[] = [
+const projects: projectInterface[] = [
   {
     title: "C2 Montereal",
     src: "c2montreal.png",
@@ -33,7 +33,7 @@ export const projects: projectInterface[] = [
   },
 ];
 
-const page = () => {
+const ProjectsModal = () => {
   const [modal, setModal] = useState<{ active: boolean; index: number }>({
     active: false,
     index: 0,
@@ -56,4 +56,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default ProjectsModal;

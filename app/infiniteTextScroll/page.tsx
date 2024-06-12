@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "@studio-freight/lenis";
 
-const page = () => {
+const InfiniteTextScroll = () => {
   const firstText = useRef(null);
   const secondText = useRef(null);
   const slider = useRef(null);
@@ -81,4 +81,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default InfiniteTextScroll;

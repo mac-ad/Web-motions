@@ -20,7 +20,7 @@ const images = [
   "12.jpg",
 ];
 
-const page = () => {
+const ParallaxScroll = () => {
   const gallary = useRef(null);
 
   const [dimension, setDimension] = useState<{
@@ -101,4 +101,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default ParallaxScroll;

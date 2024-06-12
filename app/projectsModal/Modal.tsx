@@ -41,8 +41,6 @@ const Modal = ({
 
   const container = useRef(null);
 
-  console.log(modal);
-
   useEffect(() => {
     const moveContainerX = gsap.quickTo(container.current, "left", {
       duration: 0.8,
