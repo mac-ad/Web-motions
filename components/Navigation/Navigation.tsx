@@ -8,7 +8,7 @@ const Navigation = () => {
         <Link href="/" className="text-red-500">
           <Icon icon="simple-icons:circle" fontSize={40} />
         </Link>
-        <a href="" className="ml-auto">
+        <a href="https://github.com/mac-ad/Web-motions" className="ml-auto">
           <Icon icon="mdi:github" fontSize={30} />
         </a>
       </div>
