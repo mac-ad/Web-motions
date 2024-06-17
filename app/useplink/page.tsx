@@ -6,7 +6,7 @@ import ScanAndGo from "./ScanAndGo";
 import Footer from "./Footer";
 import { motion } from "framer-motion";
 
-const page = () => {
+const Plink = () => {
   useEffect(() => {
     const lenis = new Lenis();
     const raf = (time: any) => {
@@ -118,4 +118,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Plink;

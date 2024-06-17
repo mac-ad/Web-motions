@@ -28,8 +28,9 @@ const Footer = () => {
         >
           {Array(4)
             .fill(null)
-            .map((item: null) => (
+            .map((item: null, idx: number) => (
               <img
+                key={idx}
                 src="/images/footer.png"
                 className="w-full h-full object-contain"
                 alt=""
