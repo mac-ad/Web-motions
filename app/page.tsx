@@ -26,6 +26,10 @@ const links: linkInterface[] = [
     name: "mask circle",
     href: "/maskCircle",
   },
+  {
+    name: "use plink",
+    href: "/useplink",
+  },
 ];
 
 const backgroundVariants = {
