@@ -1,61 +1,75 @@
 import { useMousePosition } from "@/hooks/useMousePosition";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { mousePositionTypes } from "@/utils/common";
+
+interface positionInterface {
+  xPosition: number;
+  yPosition: number;
+}
+
+// heartbeat animation
+const normalVariant = {
+  scale: 1,
+};
+
+const pulsedVariant = {
+  scale: 1.1,
+  transition: {
+    duration: 0.5,
+    ease: "easeInOut",
+  },
+};
 
 const ScanAndGo = () => {
   const compRef = useRef<HTMLDivElement>(null);
-
   const [isHovered, setIsHovered] = useState<boolean>(false);
-  const [positions, setPositions] = useState<{
-    x: number;
-    y: number;
-  }>({
-    x: 0,
-    y: 0,
+  const [position, setPosition] = useState<positionInterface>({
+    xPosition: 50,
+    yPosition: 50,
   });
-  const [compDim, setCompDim] = useState<any>(null);
 
-  const { x, y } = useMousePosition();
+  const { x, y } = useMousePosition({
+    type: mousePositionTypes.PIXEL,
+  });
 
-  useEffect(() => {
-    setPositions({
-      x: x,
-      y: y,
+  const size = isHovered ? 300 : 0;
+
+  const fixPosition = () => {
+    // get the top of the qr code container
+    if (!isHovered) return;
+    const { top } = compRef?.current?.getBoundingClientRect()!;
+    setPosition({
+      xPosition: x,
+      yPosition: y - top,
     });
-  }, [x, y]);
-
-  const size = isHovered ? 200 : 0;
-
-  const heartbeatAnimation = {
-    scale: [1, 1.1, 1],
   };
 
   useEffect(() => {
-    if (compRef?.current) {
-      setCompDim(compRef.current);
+    // remove the extra x and y outside of the qr component
+    if (x && y) {
+      fixPosition();
     }
-  }, [compRef]);
+    window.addEventListener("scroll", fixPosition);
 
-  const heartbeatTransition = {
-    type: "tween",
-    ease: "easeInOut", // Adjust for desired easing
-    duration: 0.5, // Adjust duration for animation speed
-    repeat: Infinity,
-  };
+    return () => {
+      window.removeEventListener("scroll", fixPosition);
+    };
+  }, [x, y]);
 
   return (
     <div
-      className="bg-[#161416] h-screen text-white py-[8rem] relative"
+      className="bg-[#161416] py-[6rem] min-h-[800px] text-white lg:py-[8rem] relative "
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       ref={compRef}
     >
-      <h1 className="text-[7rem] leading-[7rem] text-center font-semibold">
+      <h1 className="text-[5rem] leading-[5rem]  md:text-[7rem] md:leading-[7rem] text-center font-semibold">
         <div>Scan</div>
         <div>& Go</div>
       </h1>
-      <p className="text-center max-w-[60ch] mx-auto mt-5">
+      <p className="text-center max-w-[30ch] md:max-w-[60ch] mx-auto mt-5">
         Transform your payment link into a QR code that customers can scan with
         their phone to pay.
       </p>
@@ -63,22 +77,24 @@ const ScanAndGo = () => {
       <motion.div
         className="absolute h-full w-full top-0 left-0 bg-white"
         animate={{
-          WebkitMaskPosition: `${positions.x - size / 2}px ${
-            positions.y - size / 2
+          WebkitMaskPosition: `${position.xPosition - size / 2}px ${
+            position.yPosition - size / 2
           }px`,
           WebkitMaskSize: `${size}px`,
-          scale: [1, 1.1, 1],
         }}
         transition={{
           type: "tween",
           ease: "backOut",
-          duration: 0.5,
+          duration: 0.2,
         }}
         style={{
           maskImage: "url('/mask.svg')",
           maskRepeat: "no-repeat",
-          maskSize: `${150}px`,
-          maskPosition: "0px 0px",
+          mixBlendMode: "difference",
+          // maskSize: "600px",
+          // maskPosition: "50% 200%",
+          maskSize: `${size}px`,
+          maskPosition: `${position.xPosition}px ${position.yPosition}px`,
         }}
       >
         <Image

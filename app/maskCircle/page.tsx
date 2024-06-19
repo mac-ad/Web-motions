@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 const MaskCircle = () => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
-  const { x, y } = useMousePosition();
+  const { x, y } = useMousePosition({});
   const size = isHovered ? 400 : 40;
   //   const size = 100;
 
