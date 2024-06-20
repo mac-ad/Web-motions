@@ -37,7 +37,7 @@ interface Props {
   projects: projectInterface[];
 }
 
-const Modal = forwardRef<Ref, Props>((props, ref) => {
+const Modal = (props: Props) => {
   const { modal, projects, positions, visible } = props;
   const { active, index } = modal;
 
@@ -96,6 +96,6 @@ const Modal = forwardRef<Ref, Props>((props, ref) => {
       </div>
     </motion.div>
   );
-});
+};
 
 export default Modal;

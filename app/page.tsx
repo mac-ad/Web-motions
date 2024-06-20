@@ -79,11 +79,12 @@ export default function Home() {
         <p className="max-w-[60ch] opacity-80 ml-5">
           A frontend developer passionate about crafting beautiful and
           functional user experiences. Looking to bring your web ideas to life?
-          Let's connect!
+          Let&apos;s connect!
         </p>
         <div className="ml-5 flex flex-col gap-2">
           {socials?.map((social: socialInterface) => (
             <Link
+              key={social.text}
               href={social.href}
               target="_blank"
               className="flex gap-2 items-center w-fit group"
@@ -98,7 +99,7 @@ export default function Home() {
       </div>
       <div className="mb-10">
         <p className="max-w-[60ch] opacity-80 ml-5">
-          Check out Few motion designs I coded &#128526;
+          Check out Few motion designs I coded `&#128526;`
         </p>
       </div>
       {links?.map((link: linkInterface, idx: number) => {
