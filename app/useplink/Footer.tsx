@@ -21,7 +21,7 @@ const Footer = () => {
           transition={{
             type: "tween",
             ease: "linear",
-            duration: 10,
+            duration: 20,
             repeat: Infinity,
           }}
           className="flex h-full "

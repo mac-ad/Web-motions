@@ -1,47 +1,49 @@
 import Image from "next/image";
-import { projectInterface } from "./page";
+import { positionInterface, projectInterface } from "./page";
 import { motion } from "framer-motion";
 import gsap from "gsap";
-import { useEffect, useRef } from "react";
+import { ReactNode, forwardRef, useEffect, useRef } from "react";
+import { useMousePosition } from "@/hooks/useMousePosition";
 
 const scaleAnimation = {
   initial: {
     scale: 0,
-    x: "-50%",
-    y: "-50%",
   },
   open: {
     scale: 1,
-    x: "-50%",
-    y: "-50%",
-    transition: {
-      duration: 0.4,
-      ease: [0.76, 0, 0.24, 1],
-    },
+    // transition: {
+    //   duration: 0.4,
+    //   ease: [0.76, 0, 0.24, 1],
+    // },
   },
   closed: {
     scale: 0,
-    x: "-50%",
-    y: "-50%",
-    transition: {
-      duration: 0.4,
-      ease: [0.76, 0, 0.24, 1],
-    },
+    // transition: {
+    //   duration: 0.4,
+    //   ease: [0.76, 0, 0.24, 1],
+    // },
   },
 };
 
-const Modal = ({
-  modal,
-  projects,
-}: {
-  modal: { active: boolean; index: number };
+type Ref = HTMLDivElement;
+interface Props {
+  children?: ReactNode;
+  modal: {
+    active: boolean;
+    index: number;
+  };
+  visible: boolean;
+  positions: positionInterface;
   projects: projectInterface[];
-}) => {
+}
+
+const Modal = forwardRef<Ref, Props>((props, ref) => {
+  const { modal, projects, positions, visible } = props;
   const { active, index } = modal;
 
-  const container = useRef(null);
+  const container = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  const move = () => {
     const moveContainerX = gsap.quickTo(container.current, "left", {
       duration: 0.8,
       ease: "power3",
@@ -50,22 +52,24 @@ const Modal = ({
       duration: 0.8,
       ease: "power3",
     });
-    window.addEventListener("mousemove", (e: any) => {
-      const { clientX, clientY } = e;
-      moveContainerX(clientX);
-      moveContainerY(clientY);
-    });
-  }, []);
+
+    moveContainerX(positions?.x - 250 / 2);
+    moveContainerY(positions?.y - 250 / 2);
+  };
+
+  useEffect(() => {
+    move();
+  }, [positions]);
 
   return (
     <motion.div
+      ref={container}
       variants={scaleAnimation}
       initial={"initial"}
-      animate={active ? "open" : "closed"}
+      animate={visible ? "open" : "closed"}
       className="absolute h-[250px] w-[250px] flex items-center justify-center overflow-hidden pointer-events-none z-[100]"
-      ref={container}
     >
-      <div className="h-full w-full">
+      <div className="h-full w-full ">
         {projects?.map((project: projectInterface, idx: number) => {
           const { src, color } = project;
           return (
@@ -75,7 +79,7 @@ const Modal = ({
                 backgroundColor: color,
                 transform: `translateY(-${index * 100}%)`,
               }}
-              className={`bg-red-500 h-full w-full flex items-center justify-center transition-all`}
+              className={`bg-red-500 h-full w-full  flex items-center justify-center transition-all transition-duration-1000`}
             >
               {/* translate-y-[-${
                 index * 100
@@ -92,6 +96,6 @@ const Modal = ({
       </div>
     </motion.div>
   );
-};
+});
 
 export default Modal;

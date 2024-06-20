@@ -1,21 +1,53 @@
+"use client";
+
 import { Icon } from "@iconify/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
+import { useLayoutEffect, useRef } from "react";
 
 const Navigation = () => {
+  const header = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.to(header.current, {
+      scrollTrigger: {
+        trigger: document.documentElement,
+        start: 0,
+        end: 100,
+        onLeave: () => {
+          gsap.to(header.current, {
+            y: "-100",
+          });
+        },
+        onEnterBack: () => {
+          gsap.to(header.current, {
+            y: "0",
+          });
+        },
+      },
+    });
+  }, []);
+
   return (
-    <div className=" z-[999] h-[100px] flex items-center  fixed top-0 left-[50%] w-full translate-x-[-50%] ">
-      <div className="px-10 w-full mx-auto opacity-80 flex items-center">
-        <Link href="/" className="text-red-500">
-          <Icon icon="simple-icons:circle" fontSize={40} />
+    <header
+      className="z-[999] bg-[#0f0f0f] text-white h-[50px] flex items-center  fixed top-0 left-[50%] w-full translate-x-[-50%] "
+      ref={header}
+    >
+      <div className="px-4 md:px-10 w-full mx-auto opacity-80 flex items-center">
+        <Link href="/">
+          <h1 className=" font-semibold">@macad</h1>
         </Link>
-        <a
+        <Link
           href="https://github.com/mac-ad/Web-motions"
-          className="ml-auto text-red-500"
+          target="_blank"
+          className="ml-auto text-white"
         >
           <Icon icon="mdi:github" fontSize={30} />
-        </a>
+        </Link>
       </div>
-    </div>
+    </header>
   );
 };
 
