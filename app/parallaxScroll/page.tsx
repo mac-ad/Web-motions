@@ -67,8 +67,9 @@ const ParallaxScroll = () => {
 
   return (
     <>
-      <div className="h-[100vh] flex items-center justify-center">
-        <h1 className="text-7xl font-medium">Scroll Down</h1>
+      <div className="h-[100vh] flex items-center justify-center flex-col">
+        <h1 className="text-3xl md:text-7xl font-medium">Parallax Scroll</h1>
+        <p className="mt-3"> Scroll Down</p>
       </div>
       <div className="h-screen w-full overflow-hidden" ref={gallary}>
         <div className="flex w-full h-[175vh] gap-[2vw] bg-[rgba(45,44,44,1)] p-[2vw]">
@@ -95,7 +96,7 @@ const ParallaxScroll = () => {
         </div>
       </div>
       <div className="h-screen flex items-center justify-center">
-        <h1 className="text-7xl font-medium">That is it!</h1>
+        <h1 className="text-3xl md:text-7xl font-medium">That is it!</h1>
       </div>
     </>
   );

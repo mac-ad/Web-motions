@@ -12,6 +12,10 @@ export interface linkInterface {
 
 const links: linkInterface[] = [
   {
+    name: "use plink",
+    href: "/useplink",
+  },
+  {
     name: "projects modal",
     href: "/projectsModal",
   },
@@ -27,9 +31,10 @@ const links: linkInterface[] = [
     name: "mask circle",
     href: "/maskCircle",
   },
+
   {
-    name: "use plink",
-    href: "/useplink",
+    name: "magnetic Effects",
+    href: "/magneticEffects",
   },
 ];
 

@@ -14,7 +14,7 @@ const Column = ({
 }) => {
   return (
     <motion.div
-      className={`flex flex-col gap-[2vw] min-w-[300px] w-full h-full ${
+      className={`flex flex-col gap-[.5vw] md:gap-[2vw] min-w-[150px] md:min-w-[300px] w-full h-full ${
         className ?? ""
       }`}
       style={{ y }}

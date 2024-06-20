@@ -104,10 +104,13 @@ const ProjectsModal = () => {
 
   return (
     <>
-      <div className="h-screen flex items-center justify-center">
-        <h1 className="text-7xl font-medium">Scroll Down</h1>
+      <div className="h-screen flex items-center justify-center flex-col">
+        <h1 className="text-3xl  md:text-7xl font-medium text-center">
+          Hover Modal
+        </h1>
+        <p className="mt-3">Scroll Down</p>
       </div>
-      <main className="  min-h-[100vh] flex items-center justify-center">
+      <main className="min-h-[100vh] flex items-center justify-center">
         <div
           className=" relative max-w-[1000px] w-[90%] mx-auto"
           onMouseEnter={() => setHovered(true)}
@@ -131,7 +134,9 @@ const ProjectsModal = () => {
         </div>
       </main>
       <div className="h-screen flex items-center justify-center">
-        <h1 className="text-7xl font-medium">This is the end</h1>
+        <h1 className=" text-3xl md:text-7xl font-medium text-center">
+          This is the end
+        </h1>
       </div>
     </>
   );
